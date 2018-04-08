@@ -1,0 +1,25 @@
+[Desktop Entry]
+Name=Breeze Colorful
+
+X-KDE-PluginInfo-Author=IsoaSFlus
+X-KDE-PluginInfo-Email=me@isoasflus.me
+X-KDE-PluginInfo-Name=breeze-colorful
+X-KDE-PluginInfo-Version=1.1
+X-KDE-PluginInfo-Website=https://github.com/IsoaSFlus/kde-theme-backup
+X-KDE-PluginInfo-Category=
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true
+X-Plasma-API=5.0
+
+[Wallpaper]
+defaultWallpaperTheme=Next
+defaultFileSuffix=.png
+defaultWidth=1920
+defaultHeight=1080
+
+[ContrastEffect]
+enabled=true
+contrast=0.2
+intensity=0.4
+saturation=1.7
