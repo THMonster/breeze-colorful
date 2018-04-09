@@ -84,7 +84,7 @@ ForegroundInactive=175,176,179
 ForegroundLink=61,174,230
 ForegroundNegative=237,21,21
 ForegroundNeutral=201,206,59
-ForegroundNormal=<IsoaSFlus-font-color>,<IsoaSFlus-font-color>,<IsoaSFlus-font-color>
+ForegroundNormal=<IsoaSFlus-font-color>
 ForegroundPositive=17,209,22
 ForegroundVisited=61,174,230
 

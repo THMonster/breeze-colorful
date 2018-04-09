@@ -4,11 +4,13 @@ from PIL import Image
 
 def get_dominant_color(image):
 
+    s = image.size
+    image = image.crop((0, 0, s[0], int(s[1]*0.0306)))
 #颜色模式转换，以便输出rgb颜色值
     image = image.convert('RGBA')
 
 #生成缩略图，减少计算量，减小cpu压力
-    image.thumbnail((200, 200))
+    # image.thumbnail((200, 200))
 
     max_score = 0#原来的代码此处为None
     dominant_color = 0#原来的代码此处为None，但运行出错，改为0以后 运行成功，原因在于在下面的 >score > max_score的比较中，max_score的初始格式不定
@@ -25,10 +27,10 @@ def get_dominant_color(image):
         y = (y - 16.0) / (235 - 16)
 
         # 忽略高亮色
-        if y > 0.9:
-            continue
-        if ((r>200)&(g>200)&(b>200)):
-            continue
+        # if y > 0.9:
+            # continue
+        # if ((r>200)&(g>200)&(b>200)):
+            # continue
 
         # Calculate the score, preferring highly saturated colors.
         # Add 0.1 to the saturation so we don't completely ignore grayscale
