@@ -2,6 +2,40 @@
 import colorsys, sys
 from PIL import Image
 
+def calc_pixel_var(pixel):
+    pixel_var = 0
+    n =2 
+    while n >= 0:
+        temp = 70 - pixel[n]
+        if temp > 0:
+            pixel_var += temp * 0.2
+        else:
+            pixel_var += temp * 1
+        n = n - 1
+
+    if pixel_var >= 0:
+        return 1 # 1 for dark
+    else:
+        return -1 # -1 for light
+
+
+def calc_color_sum(image):
+    color_sum = 0
+    color_weight = (2, 1, 4)
+    image = image.crop((0, 0, image.size[0], int(image.size[1]*0.0306)))
+    im_slice = []
+    im_slice.append(image.crop((0, 0, int(image.size[0] / 3), image.size[1])))
+    im_slice.append(image.crop((int(image.size[0] / 3), 0, int(image.size[0] / 3 * 2), image.size[1])))
+    im_slice.append(image.crop((int(image.size[0] / 3 * 2), 0, image.size[0], image.size[1])))
+    # im_slice = tuple(image.crop((0, 0, int(image.size[0] / 3), image.size[1])), image.crop((int(image.size[0] / 3), 0, int(image.size[0] / 3 * 2), image.size[1])), image.crop((int(image.size[0] / 3 * 2), 0, image.size[0], image.size[1])))
+
+    for i, im in enumerate(im_slice):
+        for w in range(0, im.size[0]):
+            for h in range(0, im.size[1]):
+                color_sum += color_weight[i] * calc_pixel_var(im.getpixel((w, h)))
+
+    return color_sum
+
 def get_dominant_color(image):
 
     s = image.size
@@ -12,8 +46,8 @@ def get_dominant_color(image):
 #生成缩略图，减少计算量，减小cpu压力
     # image.thumbnail((200, 200))
 
-    max_score = 0#原来的代码此处为None
-    dominant_color = 0#原来的代码此处为None，但运行出错，改为0以后 运行成功，原因在于在下面的 >score > max_score的比较中，max_score的初始格式不定
+    max_score = 0
+    dominant_color = 0
 
     for count, (r, g, b, a) in image.getcolors(image.size[0] * image.size[1]):
         # 跳过纯黑色
@@ -48,4 +82,9 @@ def get_dominant_color(image):
 
 if __name__ == '__main__':
     im = Image.open(sys.argv[1])
-    print(get_dominant_color(im))
+    # print(get_dominant_color(im))
+    res = calc_color_sum(im)
+    if res >= 0:
+        print('000000')
+    else:
+        print('ffffff')
