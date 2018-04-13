@@ -10,7 +10,7 @@ def calc_pixel_var(pixel):
         if temp > 0:
             pixel_var += temp * 0.2
         else:
-            pixel_var += temp * 1
+            pixel_var += temp * 100000
         n = n - 1
 
     if pixel_var >= 0:
