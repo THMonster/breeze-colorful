@@ -4,9 +4,16 @@ from PIL import Image
 
 def calc_pixel_var(pixel):
     pixel_var = 0
-    n =2 
+
+    if pixel[0] <= 70 and pixel[1] <= 70 and pixel[2] <= 100:
+        return 1
+    else:
+        return -1
+
+    n = 2
     while n >= 0:
-        temp = 70 - pixel[n]
+        # print(pixel)
+        temp = 100 - pixel[n]
         if temp > 0:
             pixel_var += temp * 0.2
         else:
@@ -23,6 +30,7 @@ def calc_color_sum(image):
     color_sum = 0
     color_weight = (2, 1, 4)
     image = image.crop((0, 0, image.size[0], int(image.size[1]*0.0306)))
+    image = image.convert('RGBA')
     im_slice = []
     im_slice.append(image.crop((0, 0, int(image.size[0] / 3), image.size[1])))
     im_slice.append(image.crop((int(image.size[0] / 3), 0, int(image.size[0] / 3 * 2), image.size[1])))
